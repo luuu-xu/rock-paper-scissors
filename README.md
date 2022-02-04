@@ -52,4 +52,11 @@ Here's how the project is solved following TOP steps:
         use the final scoreboard to anounnce the final winner, and return the scoreboard too
 
 Possible improvements:
+- playRound() is too messy, maybe I can make three statements of this round's result in the beginning
+then return one statement "You win" if the result is that player won.
+- maybe I can write a function which takes a parameter of this round's winner (provided by whoWon()),
+then does the scorekeeping, returns both playerScore and computerScore.
+- the last step in game(), annoucing the final winner, it can be done with another function too
+it should take two parameters - playerScore and computerScore, then returns a string of annocement of such result.
+
 
