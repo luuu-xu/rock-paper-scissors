@@ -33,4 +33,23 @@ Here's how the project is solved following TOP steps:
             if playerSelection is Scissors
                 if computerSelection is Rock then return "You lose! Rock beats Scissors."
                 if computerSelection is Paper then return "You win! Scissors beats Paper."
-        
+
+3. Writes a new function game(), which plays a 5 round game that keeps score and reports a winner or loser at the end:
+    - input should be either Rock, Paper or Scissors, inputted by the user, with prompt(), 5 times in total
+    - desired ouput should be a declaration of this round's winner, with a scoreboard, each time after user inputs such choice of rock paper scissors, and after 5 times, a announcement of the winner with a final scoreboard
+    - plan:
+        prompt() asking user to choose either Rock, Paper or Scissors
+        with playerChoice use playRound() to play a single round
+        computerChoice comes from computerPlay()
+        run and let result = playRound(playerChoice, computerChoice)
+        declare this round's result
+        with result, determine who won this round:
+            whoWon(result) returns either 'Both', 'Player', 'Computer'
+        winner = whoWon(result)
+        add score to either playerScore or computerScore or both(tie)
+        return the scoreboard
+        repeat for 4 more times
+        use the final scoreboard to anounnce the final winner, and return the scoreboard too
+
+Possible improvements:
+
