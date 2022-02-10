@@ -1,4 +1,7 @@
 # rock-paper-scissors
+
+https://luuu-xu.github.io/rock-paper-scissors/
+
 A project from TOP: creating rock paper scissors with HTML, CSS and JS.
 
 Here's how the project is solved following TOP steps:
