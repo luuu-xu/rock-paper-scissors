@@ -7,35 +7,35 @@ function computerPlay() {
     } else {
         return "Scissors"
     }
-}
+};
 
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    playerSelection = playerSelection.replace(playerSelection[0], playerSelection[0].toUpperCase());
+function determineResult(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return `Tie! ${playerSelection} ties ${computerSelection}.`;
+        result = `Tie! ${playerSelection} ties ${computerSelection}.`;
     } else if (playerSelection === 'Rock') {
         if (computerSelection === 'Paper') {
-            return `You lose! ${computerSelection} beats ${playerSelection}.`;
+            result = `You lose! ${computerSelection} beats ${playerSelection}.`;
         } else if (computerSelection === 'Scissors') {
-            return `You win! ${playerSelection} beats ${computerSelection}.`;
+            result = `You win! ${playerSelection} beats ${computerSelection}.`;
         }
     } else if (playerSelection === 'Paper') {
         if (computerSelection === 'Rock') {
-            return `You win! ${playerSelection} beats ${computerSelection}.`;
+            result = `You win! ${playerSelection} beats ${computerSelection}.`;
         } else if (computerSelection === 'Scissors') {
-            return `You lose! ${computerSelection} beats ${playerSelection}.`;
+            result = `You lose! ${computerSelection} beats ${playerSelection}.`;
         }
     } else if (playerSelection === 'Scissors') {
         if (computerSelection === 'Paper') {
-            return `You win! ${playerSelection} beats ${computerSelection}.`;
+            result = `You win! ${playerSelection} beats ${computerSelection}.`;
         } else if (computerSelection === 'Rock') {
-            return `You lose! ${computerSelection} beats ${playerSelection}.`;
+            result = `You lose! ${computerSelection} beats ${playerSelection}.`;
         }
     }
+    return result;
+};
 
-}
 function whoWon(result) {
+    //console.log('whoWon ran');
     if (result.includes('Tie')) {
         return 'Both';
     } else if (result.includes('win')) {
@@ -43,8 +43,85 @@ function whoWon(result) {
     } else if (result.includes('lose')) {
         return 'Computer';
     }
+};
+
+function updateScores(winner) {
+    console.log(winner);
+    if (winner === 'Player') {
+        playerScore += 1;
+    } else if (winner === 'Computer') {
+        computerScore += 1;
+    }
+};
+
+function announceWinner (playerScore, computerScore) {
+    if ((playerScore % 5 === 0) && (playerScore !== 0)) {
+        let again = confirm('You won!!! Press OK to rematch');
+        if (again) {
+            rematch();
+            //console.log('rematch chose');
+        } else {
+            announcement.textContent = 'You won!!! Congrats! You beat the computer!';
+        }
+    } else if ((computerScore % 5 === 0) && (computerScore !== 0)) {
+        let again = confirm('You lose... Press OK to rematch');
+        if (again) {
+            rematch();
+            //console.log('rematch chose');
+        } else {
+            announcement.textContent = 'You lose... try again maybe?';
+        }
+    }
+};
+
+function rematch() {
+    playerScore = 0;
+    computerScore = 0;
+    display.textContent = '';
+    scoreboard.textContent = '';
+    announcement.textContent = '';
 }
 
+function playRound(playerSelection, computerSelection) {
+    playerSelection = this.classList.value;
+    computerSelection = computerPlay();
+    playerSelection = playerSelection.toLowerCase();
+    playerSelection = playerSelection.replace(playerSelection[0], playerSelection[0].toUpperCase());
+    //console.log('Your choice: ' + playerSelection);
+    //console.log('Computer\'s choice: ' + computerSelection);
+
+    const result = determineResult(playerSelection, computerSelection);
+    display.textContent = result;
+    
+    winner = whoWon(result);
+    updateScores(winner);
+    scoreboard.textContent = playerScore + ' : ' + computerScore;
+
+    //console.log(playerScore + ' ' + computerScore);
+    announceWinner(playerScore, computerScore);
+};
+
+const btnRock = document.querySelector('.rock');
+const btnPaper = document.querySelector('.paper');
+const btnScissors = document.querySelector('.scissors');
+const display = document.querySelector('.display');
+const scoreboard = document.querySelector('.scoreboard');
+const announcement = document.querySelector('.announcement');
+const btnReset = document.querySelector('.reset');
+
+let playerScore = 0;
+let computerScore = 0;
+
+btnRock.addEventListener('click', playRound);
+btnPaper.addEventListener('click', playRound);
+btnScissors.addEventListener('click', playRound);
+
+btnReset.addEventListener('click', rematch);
+
+
+
+
+// game();
 function game() {
     let playerScore = 0;
     let computerScore = 0;
@@ -125,6 +202,4 @@ function game() {
     } else {
         console.log(`It's a tie! Final scoreboard: ${playerScore} : ${computerScore}`);
     }
-}
-
-game();
+};
