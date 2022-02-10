@@ -59,4 +59,15 @@ then does the scorekeeping, returns both playerScore and computerScore.
 - the last step in game(), annoucing the final winner, it can be done with another function too
 it should take two parameters - playerScore and computerScore, then returns a string of annocement of such result.
 
+UI added:
+- Added several simple HTML elements including buttons for Rock Paper and Scissors, text areas for showing the result
+of each round, scoreboard for keeping the scores, and a text area for annoucing the winner.
+- Used DOM methods on previous code so the simple UI is working.
+- Modified playRound() so it does several things whenever user clicks on one of the buttons.
+- Added a few functions to help cleaning and simplfying the previous version. Including determineResult(), 
+updateScore(), announceWinner(), rematch().
+- Added rematch button so user can rematch whenever clicking on the rematch button.
+- Whenever 5 points is reached, a confirm window pops up annoucing the winner. And it allows user to rematch
+if OK is pressed there. If user cancels, the game is continued.
 
+CSS improvements can be added later on.
